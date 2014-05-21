@@ -13,24 +13,23 @@ namespace LongestCompositeWordFinderLibrary {
 
 		// Constructors
 		public CompositeWordFinder(string fileName) {
-			FileName = fileName;
-			FindAllCompositeWords();
+			FileName = fileName;			
 		}
 
 		// Public members
 		public IEnumerable<CompositeWord> GetOrderedCompositeWords() {
-			var trueCompositeWords = CompositeWordDictionary.Values.Where(cw => cw.IsTrueCompositeWord()).ToList();
+			FindAllCompositeWords();
 
+			var trueCompositeWords = CompositeWordDictionary.Values.Where(cw => cw.IsTrueCompositeWord());
 			return trueCompositeWords.OrderByDescending(cw => cw.Length);
 		}
 
 		// Private methods
 		private void FindAllCompositeWords() {
-			string[] wordArray = File.ReadAllLines(FileName);
-			for (int i = 0; i < wordArray.Length; i++) {
-				SetSubWords(wordArray, i);
-				Console.WriteLine("Completed {0} of {1}", i, wordArray.Length);
-			}
+			string[] wordArray = File.ReadAllLines(FileName).Where(w => w.Length > 0).ToArray();
+			
+			for (int i = 0; i < wordArray.Length; i++) 
+				SetSubWords(wordArray, i);				
 		}
 		private void SetSubWords(string[] wordArray, int potentialSubWordIndex) {
 			// Go thru every other word and see if this is a subword of it
@@ -55,7 +54,6 @@ namespace LongestCompositeWordFinderLibrary {
 						}
 					}
 				}
-
 			}
 		}
 	}

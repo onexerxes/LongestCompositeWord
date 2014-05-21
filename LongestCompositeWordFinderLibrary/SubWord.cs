@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace LongestCompositeWordFinderLibrary {
 	public class SubWord {
-		// Private members
-		private string Word;
-		
 		// Public properties
+		public string Word { get; private set; }
 		public int Length { get { return Word.Length; } }
 		public int CompositeWordLocationIndex { get; private set; }
 

@@ -35,7 +35,7 @@ namespace LongestCompositeWordFinderLibrary {
 				if (DoSubWordsCoverEntireWord())
 					return true;
 				else
-					SubWordList.RemoveAt(0);
+					SubWordList.RemoveAt(SubWordList.Count - 1);
 			}		
 
 			// If we get here, nothing worked		
@@ -58,13 +58,12 @@ namespace LongestCompositeWordFinderLibrary {
 				SubWord subWord = SubWordList.FirstOrDefault(sw => sw.CompositeWordLocationIndex == i);
 
 				// If nothing at this index, we cant provide full coverage
-				if (subWord == null)
+				if ((subWord == null) || (subWord.Length == 0))
 					return false;
 
-				// Otherwise, move ahead by i and check for the next word
-				else {
+				// Otherwise, move ahead by subword length and check for the next subword
+				else 
 					i += subWord.Length;
-				}
 			}
 
 			if (i == Word.Length)
