@@ -35,7 +35,7 @@ namespace LongestCompositeWordFinderLibrary {
 				if (DoSubWordsCoverEntireWord())
 					return true;
 				else
-					SubWordList.RemoveAt(SubWordList.Count - 1);
+					SubWordList.RemoveAt(0/*SubWordList.Count - 1*/);
 			}		
 
 			// If we get here, nothing worked		
